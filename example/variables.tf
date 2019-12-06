@@ -1,4 +1,8 @@
-
+variable "aws_region" {
+  type = string
+  description = "Default region used by some modules"
+  default = "us-east-1"
+}
 
 variable "subnet_private_1a_id" {
   description = "Subnet ID for EC2 instance in AZ 1a"
