@@ -98,7 +98,7 @@ resource "aws_instance" "jump_server" {
   ami           = "${data.aws_ami.ec2-ami-jump.id}" #"${var.jump_server_ami}"
   associate_public_ip_address = "true"
   instance_type = "${var.instance_type}"
-  subnet_id = "${var.jump_server_subnet_id}"
+  subnet_id = "${var.subnet_public_1a_id}"
   vpc_security_group_ids = ["${aws_security_group.jump_host_sg.id}"]
   key_name = "${var.aws_key_name}"
 
