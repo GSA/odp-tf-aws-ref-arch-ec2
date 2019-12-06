@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "${var.aws_region}"
+  region     = var.aws_region
 }
 
 data "aws_ami" "ec2-ami-private" {
@@ -32,7 +32,7 @@ data "aws_ami" "ec2-ami-jump" {
 
 resource "aws_security_group" "web_server_sg" {
   name = "web_server_sg"
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   # SSH access from the VPC
   ingress {
