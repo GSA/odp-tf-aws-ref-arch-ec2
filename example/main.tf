@@ -1,0 +1,16 @@
+module "ec2" {
+  source = "../"
+  aws_region = "${var.env}"
+  subnet_private_1a_id = "${module.vpc.private_subnets[0]}"
+  subnet_private_1b_id = "${module.vpc.private_subnets[1]}"
+  subnet_public_1a_id = "${module.vpc.public_subnets[0]}"
+  subnet_public_1b_id = "${module.vpc.public_subnets[1]}"
+  subnet_private_1a_cidr = "${module.vpc.private_subnets_cidr_blocks[0]}"
+  subnet_private_1b_cidr = "${module.vpc.private_subnets_cidr_blocks[1]}"
+  subnet_public_1a_cidr = "${module.vpc.public_subnets_cidr_blocks[0]}"
+  subnet_public_1b_cidr = "${module.vpc.public_subnets_cidr_blocks[1]}"  
+  vpc_id = "${module.vpc.vpc_id}"
+  jump_host_allowed_cidr = "${var.jump_host_allowed_cidr}"
+  aws_key_name = "${var.aws_key_name}"
+  application_allowed_cidr = "${var.application_allowed_cidr}"
+}
