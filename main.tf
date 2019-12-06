@@ -58,7 +58,7 @@ resource "aws_security_group" "jump_host_sg" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = "10.0.0.1" ###FIX THIS!!!!
+      cidr_blocks = ["{var.jump_host_allowed_cidr}"]
   }
 
   egress {
