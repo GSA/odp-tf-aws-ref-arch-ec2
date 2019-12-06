@@ -73,13 +73,13 @@ variable "tag_for_ami_name_private" {
   default = ["Packer-Private"]
 }
 
-variable "jump_host_allowed_cidr" {
+variable "jump_host_allowed_cidr_list" {
   description = "cidr block allowed to ssh to jump host"
   type = list
   default = ["159.142.0.0/16"]
 }
 
-variable "application_allowed_cidr" {
+variable "application_allowed_cidr_list" {
   description = "cidr block allowed to reach ALB on port 80"
   type = list
   default     = ["159.142.0.0/16"]
