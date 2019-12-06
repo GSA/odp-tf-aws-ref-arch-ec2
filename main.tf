@@ -52,13 +52,13 @@ resource "aws_security_group" "web_server_sg" {
 
 resource "aws_security_group" "jump_host_sg" {
   name = "jump_host_sg"
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   ingress {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = "{var.jump_host_allowed_cidr_list}"
+      cidr_blocks = var.jump_host_allowed_cidr_list
   }
 
   egress {
@@ -71,13 +71,13 @@ resource "aws_security_group" "jump_host_sg" {
 
 resource "aws_security_group" "lb_sg" {
   name = "lb_sg"
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port = 0
     to_port = 0
     protocol    = "-1"
-    cidr_blocks = "${var.application_allowed_cidr_list}"
+    cidr_blocks = var.application_allowed_cidr_list
   }
   egress {
     from_port = 0
