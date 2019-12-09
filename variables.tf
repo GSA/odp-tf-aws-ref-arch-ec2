@@ -66,11 +66,11 @@ variable "aws_key_name" {
 }
 
 variable "tag_for_ami_name_jump" {
-  default = ["ubuntu-xenial-16.04-amd64-server-20191114"]
+  default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-arm64-server-20191204"]
 }
 
 variable "tag_for_ami_name_private" {
-  default = ["ubuntu-xenial-16.04-amd64-server-20191114"]
+  default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-arm64-server-20191204"]
 }
 
 variable "jump_host_allowed_cidr_list" {
