@@ -66,11 +66,11 @@ variable "aws_key_name" {
 }
 
 variable "tag_for_ami_name_jump" {
-  default = ["Packer-Jump"]
+  default = ["ubuntu-xenial-16.04-amd64-server-20191114"]
 }
 
 variable "tag_for_ami_name_private" {
-  default = ["Packer-Private"]
+  default = ["ubuntu-xenial-16.04-amd64-server-20191114"]
 }
 
 variable "jump_host_allowed_cidr_list" {
