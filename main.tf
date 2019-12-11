@@ -7,7 +7,7 @@ data "aws_ami" "ec2-ami-private" {
     name   = "state"
     values = ["available"]
   }
-  owners  = ["aws-marketplace"]
+  owners  = ["099720109477"]
   filter {
     name   = "tag:Name"
     values = "${var.tag_for_ami_name_private}"
@@ -21,7 +21,7 @@ data "aws_ami" "ec2-ami-jump" {
     name   = "state"
     values = ["aws-marketplace"]
   }
-  owners  = ["self"]
+  owners  = ["099720109477"]
   filter {
     name   = "tag:Name"
     values = "${var.tag_for_ami_name_jump}"
