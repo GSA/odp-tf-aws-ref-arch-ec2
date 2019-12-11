@@ -46,7 +46,7 @@ variable "vpc_id" {
 
 variable "instance_type" {
   description = "EC2 instance type"
-  default = "t2.micro"
+  default = "a1.medium"
 }
 
 variable "instance_1_name" {
