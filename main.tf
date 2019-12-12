@@ -140,7 +140,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = ["${aws_security_group.lb_sg.id}"]
-  subnets            = ["${var.subnet_public_1a_id}", "${var.subnet_public_1b_id}"] # direct to public subnets 
+  subnets            = ["${var.subnet_private_1a_id}", "${var.subnet_private_1b_id}"] # direct to public subnets 
 
   # access_logs {
   #   bucket  = "${aws_s3_bucket.lb_logs.bucket}"
