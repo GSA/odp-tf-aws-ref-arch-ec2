@@ -1,6 +1,3 @@
-provider "aws" {
-  region     = var.aws_region
-}
 
 data "aws_ami" "ec2-ami-private" {
   filter {
