@@ -1,27 +1,61 @@
-# Instances
+# odp-tf-aws-ref-arch-ec2
 
-This module creates three AWS instances: 
-- Two private instances built from an AMI using [this](../../packer/packer-private.json) Packer file. They will host Nginx web servers and are only accesable from within the VPC. 
-- One public instance built from an AMI using [this](../../packer/packer-jump.json) packer file. It is used as a jump server to access the private instances because the private servers are only accessable from within the VPC built by [this](../network) module.  
+## Overview <a name="s1"></a>
 
-## Variables 
-| Name | Description |
-|--|--|
-| subnet_private_1a_id | The subnet ID for the first private instance |
-| subnet_private_1b_id | The subnet ID for the first second instance |
-| subnet_public_1a_id | The first subnet ID to hook up to the load balancer |
-| subnet_public_1b_id | The second subnet ID to hook up to the load balancer |
-| vpc_id | The ID of the VPC |
-| subnet_private_1a_cidr | The CIDR block of the subnet with the first private instance used to configure the load balancer security group |
-| subnet_private_1b_cidr | The CIDR block of the subnet with the second private instance used to configure the load balancer security group |
-| vpc_cidr | The CIDR block of the VPC |
-| jump_host_allowed_cidr_list | The list of CIDR blocks to allow SSH access to the public instance |
-| jump_server_subnet_id | The subnet ID to place the public instance |
-| aws_key_name | The name of the AWS key pair used to authenticate into the three instances |
-| tag_for_ami_name_ jump | An array of strings which represent the value to the tag `Name` for the AMI to be created for the jump server |
-| tag_for_ami_name_private | An array of strings which represent the value to the tag `Name` for the AMI to be created for the private servers |
-| application_allowed_cidr_list | An array of CIDR blocks that are allowed access to the load balancer | 
+The `odp-tf-aws-ref-arch-ec2` module is used to configure X resources.
 
-## Further Information
+## Table of Contents <a name="s2"></a>
 
-To learn more about EC2 Instances click [here](https://aws.amazon.com/ec2/).
+* [Overview](#s1)
+* [Table of Conents](#s2)
+* [Module Contents](#s3)
+* [Module Variables](#s4)
+* [Module Setup](#s5)
+
+
+## Module Contents <a name="s3"></a>
+
+| Folder / File      |  Description  |
+|---          |---    |
+| main.tf   |   description |
+| variables.tf   |   description |
+| output.tf   |   description |
+
+## Module Variables  <a name="s4"></a>
+
+
+### Inputs
+
+The following variables need to be set either by setting proper environment variables or editing the variables.tf file:
+
+| Variable      |  Type  |  Description  |
+|---          |---        |---  | 
+| variable  |  string |   description |
+
+
+### Outputs
+
+The following variables need to be set either by setting proper environment variables or editing the variables.tf file:
+
+| Variable      |  Type  |  Description  |
+|---          |---        |---  | 
+| variable  |  string |   description |
+
+## Module Setup <a name="s5"></a>
+
+
+### Required IAM
+
+
+### Example
+
+
+```
+module "module_name" {
+  source = "../modules/module_name" 
+  var_1 = "1"
+  var_2 = "2"
+
+}
+
+```
