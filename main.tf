@@ -1,4 +1,6 @@
 
+provider "aws" {}
+
 data "aws_ami" "ec2-ami-private" {
   filter {
     name   = "state"
