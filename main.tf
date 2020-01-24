@@ -1,30 +1,4 @@
 
-data "aws_ami" "ec2-ami-private" {
-  filter {
-    name   = "state"
-    values = ["available"]
-  }
-  filter {
-    name   = "name"
-    values = "${var.tag_for_ami_name_private}"
-  }
-  owners  = ["099720109477"]
-  most_recent = true
-}
-
-data "aws_ami" "ec2-ami-jump" {
-  filter {
-    name   = "state"
-    values = ["available"]
-  }
-  filter {
-    name   = "name"
-    values = "${var.tag_for_ami_name_jump}"
-  }
-  owners  = ["099720109477"]
-  most_recent = true
-}
-
 resource "aws_security_group" "web_server_sg" {
   name = "web_server_sg"
   vpc_id = var.vpc_id
@@ -90,7 +64,7 @@ resource "aws_security_group" "lb_sg" {
 
 # Jump host
 resource "aws_instance" "jump_server" {
-  ami           = "${data.aws_ami.ec2-ami-jump.id}" #"${var.jump_server_ami}"
+  ami           = "${var.ami_id_jump}"
   associate_public_ip_address = "true"
   instance_type = "${var.instance_type}"
   subnet_id = "${var.subnet_public_1a_id}"
@@ -105,7 +79,7 @@ resource "aws_instance" "jump_server" {
 # Application hosts
 
 resource "aws_instance" "instance_1" {
-  ami           = "${data.aws_ami.ec2-ami-private.id}"
+  ami           = "${var.ami_id_private}"
   instance_type = "${var.instance_type}"
   subnet_id = "${var.subnet_private_1a_id}"
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
