@@ -66,11 +66,11 @@ variable "aws_key_name" {
 }
 
 variable "ami_id_jump" {
-  default = ["ami-0bfb5f753b6c2d30b"]
+  default = "ami-0bfb5f753b6c2d30b"
 }
 
 variable "ami_id_private" {
-  default = ["ami-0bfb5f753b6c2d30b"]
+  default = "ami-0bfb5f753b6c2d30b"
 }
 
 
