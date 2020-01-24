@@ -65,13 +65,14 @@ variable "aws_key_name" {
   description = "aws ec2 key name used to authenticate onto jump server"
 }
 
-variable "tag_for_ami_name_jump" {
-  default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20200110"]
+variable "ami_id_jump" {
+  default = ["ami-0bfb5f753b6c2d30b"]
 }
 
-variable "tag_for_ami_name_private" {
-  default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20200110"]
+variable "ami_id_private" {
+  default = ["ami-0bfb5f753b6c2d30b"]
 }
+
 
 variable "jump_host_allowed_cidr_list" {
   description = "cidr block allowed to ssh to jump host"
