@@ -91,7 +91,7 @@ resource "aws_instance" "instance_1" {
 }
 
 resource "aws_instance" "instance_2" {
-  ami           = "${data.aws_ami.ec2-ami-private.id}"
+  ami           = "${var.ami_id_private}"
   instance_type = "${var.instance_type}"
   subnet_id = "${var.subnet_private_1b_id}"
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
