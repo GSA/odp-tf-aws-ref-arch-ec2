@@ -1,7 +1,7 @@
 variable "aws_region" {
-  type = string
+  type        = string
   description = "Default region used by some modules"
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "subnet_private_1a_id" {
@@ -39,14 +39,14 @@ variable "subnet_public_1b_cidr" {
 
 
 variable "vpc_id" {
-    description = "ID of the VPC "
+  description = "ID of the VPC "
 }
 
 
 
 variable "instance_type" {
   description = "EC2 instance type"
-  default = "t2.nano"
+  default     = "t2.nano"
 }
 
 variable "instance_1_name" {
@@ -76,13 +76,13 @@ variable "ami_id_private" {
 
 variable "jump_host_allowed_cidr_list" {
   description = "cidr block allowed to ssh to jump host"
-  type = list
-  default = ["159.142.0.0/16"]
+  type        = list
+  default     = ["159.142.0.0/16"]
 }
 
 variable "application_allowed_cidr_list" {
   description = "cidr block allowed to reach ALB on port 80"
-  type = list
+  type        = list
   default     = ["159.142.0.0/16"]
 }
 

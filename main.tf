@@ -1,57 +1,57 @@
 
 resource "aws_security_group" "web_server_sg" {
-  name = "web_server_sg"
+  name   = "web_server_sg"
   vpc_id = var.vpc_id
 
   # SSH access from the VPC
   ingress {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = [ "${aws_instance.jump_server.private_ip}/32" ]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${aws_instance.jump_server.private_ip}/32"]
   }
 
   ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    security_groups = [ "${aws_security_group.lb_sg.id}" ]
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.lb_sg.id}"]
   }
 }
 
 resource "aws_security_group" "jump_host_sg" {
-  name = "jump_host_sg"
+  name   = "jump_host_sg"
   vpc_id = var.vpc_id
 
   ingress {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = var.jump_host_allowed_cidr_list
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.jump_host_allowed_cidr_list
   }
 
   egress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["${var.subnet_private_1a_cidr}", "${var.subnet_private_1b_cidr}"]
   }
 }
 
 resource "aws_security_group" "lb_sg" {
-  name = "lb_sg"
+  name   = "lb_sg"
   vpc_id = var.vpc_id
 
   ingress {
-    from_port = 0
-    to_port = 0
+    from_port   = 0
+    to_port     = 0
     protocol    = "-1"
     cidr_blocks = var.application_allowed_cidr_list
   }
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["${var.subnet_private_1a_cidr}", "${var.subnet_private_1b_cidr}"]
   }
 }
@@ -64,12 +64,12 @@ resource "aws_security_group" "lb_sg" {
 
 # Jump host
 resource "aws_instance" "jump_server" {
-  ami           = "${var.ami_id_jump}"
+  ami                         = "${var.ami_id_jump}"
   associate_public_ip_address = "true"
-  instance_type = "${var.instance_type}"
-  subnet_id = "${var.subnet_public_1a_id}"
-  vpc_security_group_ids = ["${aws_security_group.jump_host_sg.id}"]
-  key_name = "${var.aws_key_name}"
+  instance_type               = "${var.instance_type}"
+  subnet_id                   = "${var.subnet_public_1a_id}"
+  vpc_security_group_ids      = ["${aws_security_group.jump_host_sg.id}"]
+  key_name                    = "${var.aws_key_name}"
 
   tags = {
     Name = "${var.jump_server_name}"
@@ -79,11 +79,11 @@ resource "aws_instance" "jump_server" {
 # Application hosts
 
 resource "aws_instance" "instance_1" {
-  ami           = "${var.ami_id_private}"
-  instance_type = "${var.instance_type}"
-  subnet_id = "${var.subnet_private_1a_id}"
+  ami                    = "${var.ami_id_private}"
+  instance_type          = "${var.instance_type}"
+  subnet_id              = "${var.subnet_private_1a_id}"
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
-  key_name = "${var.aws_key_name}"
+  key_name               = "${var.aws_key_name}"
 
   tags = {
     Name = "${var.instance_1_name}"
@@ -91,11 +91,11 @@ resource "aws_instance" "instance_1" {
 }
 
 resource "aws_instance" "instance_2" {
-  ami           = "${var.ami_id_private}"
-  instance_type = "${var.instance_type}"
-  subnet_id = "${var.subnet_private_1b_id}"
+  ami                    = "${var.ami_id_private}"
+  instance_type          = "${var.instance_type}"
+  subnet_id              = "${var.subnet_private_1b_id}"
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
-  key_name = "${var.aws_key_name}"
+  key_name               = "${var.aws_key_name}"
 
   tags = {
     Name = "${var.instance_2_name}"
@@ -146,10 +146,10 @@ resource "aws_lb_target_group_attachment" "alb_attatchment_2" {
 
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = "${aws_lb.alb.arn}"
-  port = 80
-  protocol = "HTTP"
+  port              = 80
+  protocol          = "HTTP"
   default_action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = "${aws_lb_target_group.alb_target_group.arn}"
   }
 }
