@@ -1,5 +1,6 @@
 
 resource "aws_security_group" "web_server_sg" {
+  description = "Webserver Security group"
   name   = "web_server_sg"
   vpc_id = var.vpc_id
 
@@ -20,6 +21,7 @@ resource "aws_security_group" "web_server_sg" {
 }
 
 resource "aws_security_group" "jump_host_sg" {
+  description = "Jump server security group"
   name   = "jump_host_sg"
   vpc_id = var.vpc_id
 
@@ -39,6 +41,7 @@ resource "aws_security_group" "jump_host_sg" {
 }
 
 resource "aws_security_group" "lb_sg" {
+  description = "Loadbalancer security group"
   name   = "lb_sg"
   vpc_id = var.vpc_id
 
@@ -108,7 +111,7 @@ resource "aws_instance" "instance_2" {
 
 resource "aws_lb" "alb" {
   name               = "odp-ra-alb"
-  internal           = false
+  internal           = false #tfsec:ignore:AWS005
   load_balancer_type = "application"
   security_groups    = ["${aws_security_group.lb_sg.id}"]
   subnets            = ["${var.subnet_private_1a_id}", "${var.subnet_private_1b_id}"] # direct to public subnets 
@@ -147,7 +150,7 @@ resource "aws_lb_target_group_attachment" "alb_attatchment_2" {
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = 80
-  protocol          = "HTTP"
+  protocol          = "HTTP" #tfsec:ignore:AWS004
   default_action {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.alb_target_group.arn}"
